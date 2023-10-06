@@ -4,9 +4,12 @@
 plugins {
     application
     kotlin("jvm")
-    id("org.jlleitschuh.gradle.ktlint")
+    id("org.jlleitschuh.gradle.ktlint") version "<current_version>"
 }
 
+repositories{
+    mavenCentral()
+}
 application {
     mainClass.set("org.jlleitschuh.gradle.ktlint.sample.kotlin.MainKt")
 }
