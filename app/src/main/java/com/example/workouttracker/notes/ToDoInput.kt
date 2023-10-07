@@ -55,6 +55,7 @@ import androidx.compose.ui.unit.dp
     Main components of the assignment are done here
  */
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ToDoInput(
     viewModel: ToDoViewModel,
@@ -106,16 +107,17 @@ fun PriorityDropdown(
 ) {
     var expanded by rememberSaveable { mutableStateOf(false) }
     val priorities = Priority.values()
-        Box(
-            modifier = Modifier
-                .clickable { expanded = true }
-                .border(1.dp, Color.Gray)
-                .padding(16.dp),
-        ) {
-            Text(
-                text = "Priority: ${selectedPriority.text}"
-            )
-        }
+
+    Box(
+        modifier = Modifier
+            .clickable { expanded = true }
+            .border(1.dp, Color.Gray)
+            .padding(16.dp),
+    ) {
+        Text(
+            text = "Priority: ${selectedPriority.text}"
+        )
+    }
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = { expanded = false }
