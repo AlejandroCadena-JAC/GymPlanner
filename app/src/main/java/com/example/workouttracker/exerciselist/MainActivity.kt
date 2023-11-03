@@ -164,6 +164,7 @@ fun Greeting( modifier: Modifier = Modifier) {
         mutableStateOf("")
     }
     var exerciseChoice by remember { mutableStateOf("")}
+    var repRange by remember { mutableStateOf("")}
 
     val extraPadding = if(expanded.value) 48.dp else 0.dp
 
@@ -185,6 +186,9 @@ fun Greeting( modifier: Modifier = Modifier) {
                 OutlinedTextField(value = exerciseChoice , onValueChange = {exerciseChoice = it}, label = { Text(
                     text = "Exercise Choice"
                 )})
+                Text(text = "What is your goal reps?")
+                OutlinedTextField(value = repRange, onValueChange = {repRange = it},
+                    label = { Text(text = "Repetitions") })
 
                 ExerciseList(input = exerciseChoice)
 
