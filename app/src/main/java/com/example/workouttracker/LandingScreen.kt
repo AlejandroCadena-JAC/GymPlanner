@@ -19,7 +19,6 @@ fun LandingScreen(onTimeout: () -> Unit, modifier: Modifier = Modifier){
 
         LaunchedEffect(Unit){
             delay(2000)
-
             currentOnTimeout()
         }
         Image(painterResource(id = R.drawable.logo), contentDescription = null)
