@@ -49,24 +49,34 @@ class MainActivity : ComponentActivity() {
                 val currentBackStack by navController.currentBackStackEntryAsState()
                 val currentDestination = currentBackStack?.destination
 
-                val currentScreen = exerciseTabRowScreens.find { it.route == currentDestination?.route } ?: ExerciseInput
-
-                Scaffold(topBar= {
-                    ExerciseTabRow(allScreens = exerciseTabRowScreens,
-                        onTabSelected = {newScreen-> navController.navigateSingleTo(newScreen.route)},
-                        currentScreen = currentScreen,
+                val currentScreen =
+                    exerciseTabRowScreens.find { it.route == currentDestination?.route }
+                        ?: ExerciseInput
+                var showLandingScreen by remember { mutableStateOf(true) }
+                if (showLandingScreen) {
+                    LandingScreen(onTimeout = { showLandingScreen = false })
+                } else {
+                    Scaffold(topBar = {
+                        ExerciseTabRow(
+                            allScreens = exerciseTabRowScreens,
+                            onTabSelected = { newScreen -> navController.navigateSingleTo(newScreen.route) },
+                            currentScreen = currentScreen,
                         )
-                }){innerPadding ->
-                    NavHost(navController = navController,
-                        startDestination = ExerciseInput.route, modifier = Modifier.padding(innerPadding) ){
-                        composable(route = ExerciseInput.route){
-                            WorkoutInput()
-                        }
-                        composable(route = ExerciseList.route){
-                            WorkoutList()
-                        }
-                        composable(route = Notes.route){
-                            ToDoScreen()
+                    }) { innerPadding ->
+                        NavHost(
+                            navController = navController,
+                            startDestination = ExerciseInput.route,
+                            modifier = Modifier.padding(innerPadding)
+                        ) {
+                            composable(route = ExerciseInput.route) {
+                                WorkoutInput()
+                            }
+                            composable(route = ExerciseList.route) {
+                                WorkoutList()
+                            }
+                            composable(route = Notes.route) {
+                                ToDoScreen()
+                            }
                         }
                     }
                 }
