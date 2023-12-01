@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.calendartest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -16,10 +18,12 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -108,6 +112,9 @@ class CalendarActivity : ComponentActivity() {
 fun CalendarContent() {
     val dataSource = CalendarDataSource()
     var calendarUiModel by remember { mutableStateOf(dataSource.getData(lastSelectedDate = dataSource.today)) }
+    var event by remember { mutableStateOf("Enter Event")}
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -138,6 +145,9 @@ fun CalendarContent() {
                 }
             )
         })
+
+        TextField(value = event, onValueChange ={event = it}, label = { Text("Event")} , modifier = Modifier.padding(16.dp))
+
 
     }
 }
@@ -192,7 +202,7 @@ fun ContentItem(date: CalendarUiModel.Date,
     Card(
         modifier = Modifier
             .padding(vertical = 4.dp, horizontal = 4.dp)
-            .clickable{ onClickListener(date)}
+            .clickable { onClickListener(date) }
         ,
         colors = CardDefaults.cardColors(
             // background colors of the selected date
@@ -223,6 +233,14 @@ fun ContentItem(date: CalendarUiModel.Date,
         }
     }
 }
+
+
+@Composable
+fun EventLogger(){
+
+}
+
+
 @Preview(showBackground = true)
 @Composable
 fun CalendarPreview() {

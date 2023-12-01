@@ -61,6 +61,9 @@ fun MainNavigator() {
         composable("notes") {
             NotesScreen(navController)
         }
+        composable("calendar"){
+
+        }
     }
 }
 
@@ -115,6 +118,8 @@ fun NotesScreen(navController: NavController) {
         ToDoScreen()
     }
 }
+
+
 
 @Composable
 fun SquareButton(onClick: () -> Unit, content: @Composable () -> Unit) {
