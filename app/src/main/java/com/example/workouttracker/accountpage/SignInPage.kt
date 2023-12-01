@@ -28,10 +28,96 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.Visibility
 
-@Preview
+@Composable
+fun SignInPage(){
+    var showLoginPage by remember { mutableStateOf(true) }
+
+    if (showLoginPage) {
+        LoginPage(onSignUpClick = { showLoginPage = false })
+    } else {
+        SignUpPage(onLogInClick = { showLoginPage = true })
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignInPage() {
+fun LoginPage(onSignUpClick: () -> Unit) {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisibility by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(50.dp),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // TITLE
+        Text(
+            text = "Log In",
+            modifier = Modifier
+                .padding(bottom = 20.dp)
+        )
+
+        // EMAIL INPUT
+        TextField(
+            value = email,
+            onValueChange = { newText ->
+                email = newText
+            },
+            label = { Text(text = "Enter your email") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+        )
+
+        // PASSWORD INPUT
+        TextField(
+            value = password,
+            onValueChange = { newText ->
+                password = newText
+            },
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            label = { Text("Enter your Password") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            trailingIcon = {
+                Checkbox(
+                    checked = passwordVisibility,
+                    onCheckedChange = { passwordVisibility = it }
+                )
+            }
+        )
+
+        // LOG IN BUTTON
+        Button(
+            onClick = {
+                // Handle login logic here
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+        ) {
+            Text("Log In")
+        }
+
+        // SIGN UP BUTTON
+        Button(
+            onClick = { onSignUpClick() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+        ) {
+            Text("Sign Up")
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SignUpPage(onLogInClick: () -> Unit) {
     var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -176,6 +262,16 @@ fun SignInPage() {
 
         error.value?.let { error ->
             Text(text = error, color = Color.Red, modifier = Modifier.padding(vertical = 5.dp))
+        }
+
+        // BACK TO SIGN IN BUTTON
+        Button(
+            onClick = { onLogInClick() },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+        ) {
+            Text("Back to Log In")
         }
     }
 }
