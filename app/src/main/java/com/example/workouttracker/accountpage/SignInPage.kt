@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -55,8 +56,9 @@ fun SignInPage() {
     ) {
         // TITLE
         Text(
-            text = "App Title",
-            modifier = Modifier.padding(bottom = 20.dp)
+            text = "Create an Account",
+            modifier = Modifier
+                .padding(bottom = 20.dp)
         )
 
         // EMAIL INPUT
@@ -64,6 +66,7 @@ fun SignInPage() {
             value = email,
             onValueChange = { newText ->
                 email = newText
+                emailError = if (!isValidEmail(newText)) "Invalid email format" else null
             },
             label = { Text(text = "Enter your email") },
             modifier = Modifier
@@ -80,6 +83,7 @@ fun SignInPage() {
             value = username,
             onValueChange = { newText ->
                 username = newText
+                usernameError = if (newText.isBlank()) "Username cannot be blank" else null
             },
             label = { Text("Enter your Username") },
             modifier = Modifier
@@ -96,6 +100,7 @@ fun SignInPage() {
             value = password,
             onValueChange = { newText ->
                 password = newText
+                passwordError = if (newText.length < 6) "Password must be at least 6 characters" else null
             },
             visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             label = { Text("Enter your Password") },
@@ -119,6 +124,7 @@ fun SignInPage() {
             value = confirmPassword,
             onValueChange = { newText ->
                 confirmPassword = newText
+                confirmPasswordError = if (newText != password) "Passwords do not match" else null
             },
             visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             label = { Text("Enter your Confirm Password") },
@@ -136,6 +142,7 @@ fun SignInPage() {
             value = age,
             onValueChange = { newText ->
                 age = newText
+                ageError = if (newText.isBlank() || newText.toIntOrNull() == null || newText.toInt() < 13) "Age must be 13 or older" else null
             },
             label = { Text("Enter your Age") },
             modifier = Modifier
@@ -146,17 +153,23 @@ fun SignInPage() {
         ageError?.let { error ->
             Text(text = error, color = Color.Red, modifier = Modifier.padding(vertical = 5.dp))
         }
-
         // SUBMIT BUTTON
         Button(
             onClick = {
-                // Handle sign-in logic or navigate to Firebase authentication
+                if (email.isNotBlank() && password.isNotBlank() &&
+                    username.isNotBlank() && confirmPassword.isNotBlank() && age.isNotBlank() &&
+                    emailError == null && usernameError == null && passwordError == null &&
+                    confirmPasswordError == null && ageError == null
+                ) {
+                    // Handle sign-in logic or navigate to Firebase authentication
+                } else {
+                    error.value = "Please fix the errors before signing in."
+                }
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
-            enabled = email.isNotBlank() && password.isNotBlank() &&
-                    username.isNotBlank() && confirmPassword.isNotBlank() && age.isNotBlank()
+            enabled = true // Always enabled, validation will handle the actual sign-in conditions
         ) {
             Text("Sign In")
         }
@@ -165,4 +178,9 @@ fun SignInPage() {
             Text(text = error, color = Color.Red, modifier = Modifier.padding(vertical = 5.dp))
         }
     }
+}
+
+private fun isValidEmail(email: String): Boolean {
+    val emailRegex = Regex("^\\S+@\\S+\\.\\S+\$")
+    return email.matches(emailRegex)
 }
