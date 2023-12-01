@@ -25,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.workouttracker.calendar.EventLoggerData
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -40,6 +42,10 @@ import java.time.format.FormatStyle
 import java.time.temporal.ChronoUnit
 import java.util.stream.Collectors
 import java.util.stream.Stream
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.*
+import kotlinx.coroutines.flow.collect
+import java.util.Date
 
 data class CalendarUiModel(
     val selectedDate: Date, // the date selected by the User. by default is Today.
@@ -57,6 +63,11 @@ data class CalendarUiModel(
         val day: String = date.format(DateTimeFormatter.ofPattern("E")) // get the day by formatting the date
     }
 }
+
+data class Event(val selectedDate: CalendarUiModel.Date,
+    val name: String)
+
+
 class CalendarDataSource {
 
     val today: LocalDate
@@ -100,6 +111,7 @@ class CalendarDataSource {
     )
 }
 class CalendarActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -113,7 +125,7 @@ fun CalendarContent() {
     val dataSource = CalendarDataSource()
     var calendarUiModel by remember { mutableStateOf(dataSource.getData(lastSelectedDate = dataSource.today)) }
     var event by remember { mutableStateOf("Enter Event")}
-
+    var eventList = mutableListOf<Event>()
 
     Column(
         modifier = Modifier
@@ -144,10 +156,19 @@ fun CalendarContent() {
                     )
                 }
             )
+
+
         })
 
-        TextField(value = event, onValueChange ={event = it}, label = { Text("Event")} , modifier = Modifier.padding(16.dp))
-
+        TextField(value = event, onValueChange ={event = it
+          eventList.add(Event(calendarUiModel.selectedDate,event)) }, label = { Text("Event")} , modifier = Modifier.padding(16.dp))
+        
+        LazyRow{
+            items(items = eventList){
+                event ->
+                Text("Event: ${event.name} Date: ${event.selectedDate}")
+            }
+        }
 
     }
 }
@@ -235,10 +256,24 @@ fun ContentItem(date: CalendarUiModel.Date,
 }
 
 
-@Composable
-fun EventLogger(){
-
-}
+//@Composable
+//fun EventLogger(eventLoggerDataStore: EventLoggerData){
+//var event by remember {
+//    mutableStateOf("")
+//}
+//
+//    LaunchedEffect(key1 = eventLoggerDataStore){
+//        eventLoggerDataStore.getEvent().collect(){
+//            storedEvent -> event = storedEvent
+//        }
+//    }
+//    TextField(value = event, onValueChange = {newEvent -> event = newEvent
+//    viewModelScope.launch {
+//        eventLoggerDataStore.setEvent(newEvent)
+//    }}
+//    )
+//
+//}
 
 
 @Preview(showBackground = true)

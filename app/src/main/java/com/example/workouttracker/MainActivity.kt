@@ -101,6 +101,9 @@ fun ExerciseListScreen(navController: NavController) {
         }) {
             Text("Notes")
         }
+        SquareButton(onClick = {navController.navigate("calendar")}) {
+            Text(text = "Calendar")
+        }
         WorkoutList()
     }
 
@@ -119,6 +122,9 @@ fun NotesScreen(navController: NavController) {
         }) {
             Text("List")
         }
+        SquareButton(onClick = {navController.navigate("calendar")}) {
+            Text(text = "Calendar")
+        }
         ToDoScreen()
     }
 }
@@ -136,6 +142,7 @@ fun CalendarScreen (navController: NavController){
         }) {
             Text("List")
         }
+
         CalendarContent()
     }
 }
