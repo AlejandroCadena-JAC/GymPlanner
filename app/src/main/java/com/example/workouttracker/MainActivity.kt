@@ -24,6 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.codelabs.state.ToDoScreen
+import com.example.calendartest.CalendarContent
 import com.example.workouttracker.exerciseinput.WorkoutInput
 import com.example.workouttracker.exerciselist.WorkoutList
 import com.example.workouttracker.ui.theme.WorkoutTrackerTheme
@@ -62,7 +63,7 @@ fun MainNavigator() {
             NotesScreen(navController)
         }
         composable("calendar"){
-
+            CalendarScreen(navController)
         }
     }
 }
@@ -79,6 +80,9 @@ fun ExerciseInputScreen(navController: NavController) {
             navController.navigate("notes")
         }) {
             Text("Notes")
+        }
+        SquareButton(onClick = {navController.navigate("calendar")}) {
+            Text(text = "Calendar")
         }
         WorkoutInput()
     }
@@ -119,7 +123,22 @@ fun NotesScreen(navController: NavController) {
     }
 }
 
-
+@Composable
+fun CalendarScreen (navController: NavController){
+    Column {
+        SquareButton(onClick = {
+            navController.navigate("exerciseinput")
+        }) {
+            Text("Input")
+        }
+        SquareButton(onClick = {
+            navController.navigate("exerciselist")
+        }) {
+            Text("List")
+        }
+        CalendarContent()
+    }
+}
 
 @Composable
 fun SquareButton(onClick: () -> Unit, content: @Composable () -> Unit) {
