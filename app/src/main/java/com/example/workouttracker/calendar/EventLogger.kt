@@ -12,7 +12,7 @@ class EventLoggerData (private val dataStore: DataStore<Preferences>){
 private object Keys {
     val EVENT = stringPreferencesKey("event")
 }
-//fun getEvent(): Flow<String> {
+//fun getEvent(dataStore: DataStore<Preferences>): Flow<String> {
 //    return dataStore.data.map {preferences ->
 //        preferences[Keys.EVENT] ?: "Enter Event"
 //    }

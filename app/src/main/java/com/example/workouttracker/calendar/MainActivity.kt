@@ -1,7 +1,9 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.example.calendartest
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -44,6 +46,9 @@ import java.util.stream.Collectors
 import java.util.stream.Stream
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
+import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.collect
 import java.util.Date
 
@@ -125,8 +130,21 @@ fun CalendarContent() {
     val dataSource = CalendarDataSource()
     var calendarUiModel by remember { mutableStateOf(dataSource.getData(lastSelectedDate = dataSource.today)) }
     var event by remember { mutableStateOf("Enter Event")}
-    var eventList = mutableListOf<Event>()
+    val eventDatabase = Firebase.firestore
+    val defaultEvent = hashMapOf(
+        "name" to "rest",
+        "date" to calendarUiModel.selectedDate
+    )
 
+
+    eventDatabase.collection("events")
+        .add(defaultEvent)
+        .addOnSuccessListener { documentReference -> Log.d(TAG,"DocumentSnapshot added with ID: ${documentReference.id}") }
+        .addOnFailureListener{
+            e ->
+            Log.w(TAG, "Error adding document", e)
+        }
+    
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -161,14 +179,9 @@ fun CalendarContent() {
         })
 
         TextField(value = event, onValueChange ={event = it
-          eventList.add(Event(calendarUiModel.selectedDate,event)) }, label = { Text("Event")} , modifier = Modifier.padding(16.dp))
+           }, label = { Text("Event")} , modifier = Modifier.padding(16.dp))
         
-        LazyRow{
-            items(items = eventList){
-                event ->
-                Text("Event: ${event.name} Date: ${event.selectedDate}")
-            }
-        }
+
 
     }
 }
