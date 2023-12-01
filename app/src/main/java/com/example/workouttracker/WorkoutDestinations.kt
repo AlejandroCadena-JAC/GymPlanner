@@ -20,7 +20,7 @@ object Notes: WorkoutDestination{
     override val route = "notes"
 }
 object SignIn: WorkoutDestination{
-    override val route = "signin"
+    override val route = "account"
 }
 
 val exerciseTabRowScreens = listOf(ExerciseInput, ExerciseList, Notes, SignIn)

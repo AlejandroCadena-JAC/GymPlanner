@@ -20,6 +20,7 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.ui.graphics.Color
@@ -27,6 +28,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.Visibility
+import com.example.workouttracker.ui.theme.Purple80
+import com.example.workouttracker.ui.theme.WorkoutTrackerTheme
 
 @Composable
 fun SignInPage(){
@@ -45,72 +48,73 @@ fun LoginPage(onSignUpClick: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(50.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        // TITLE
-        Text(
-            text = "Log In",
+    WorkoutTrackerTheme {
+        Column(
             modifier = Modifier
-                .padding(bottom = 20.dp)
-        )
+                .fillMaxSize()
+                .padding(50.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // TITLE
+            Text(
+                text = "Log In",
+                modifier = Modifier
+                    .padding(bottom = 20.dp)
+            )
 
-        // EMAIL INPUT
-        TextField(
-            value = email,
-            onValueChange = { newText ->
-                email = newText
-            },
-            label = { Text(text = "Enter your email") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-        )
+            // EMAIL INPUT
+            TextField(
+                value = email,
+                onValueChange = { newText ->
+                    email = newText
+                },
+                label = { Text(text = "Enter your email") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+            )
 
-        // PASSWORD INPUT
-        TextField(
-            value = password,
-            onValueChange = { newText ->
-                password = newText
-            },
-            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
-            label = { Text("Enter your Password") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            trailingIcon = {
-                Checkbox(
-                    checked = passwordVisibility,
-                    onCheckedChange = { passwordVisibility = it }
-                )
+            // PASSWORD INPUT
+            TextField(
+                value = password,
+                onValueChange = { newText ->
+                    password = newText
+                },
+                visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+                label = { Text("Enter your Password") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                trailingIcon = {
+                    Checkbox(
+                        checked = passwordVisibility,
+                        onCheckedChange = { passwordVisibility = it }
+                    )
+                }
+            )
+
+            // LOG IN BUTTON
+            Button(
+                onClick = {
+                    // Handle login logic here
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+            ) {
+                Text("Log In")
             }
-        )
 
-        // LOG IN BUTTON
-        Button(
-            onClick = {
-                // Handle login logic here
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-        ) {
-            Text("Log In")
-        }
-
-        // SIGN UP BUTTON
-        Button(
-            onClick = { onSignUpClick() },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-        ) {
-            Text("Sign Up")
+            // SIGN UP BUTTON
+            Button(
+                onClick = { onSignUpClick() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+            ) {
+                Text("Sign Up")
+            }
         }
     }
 }
