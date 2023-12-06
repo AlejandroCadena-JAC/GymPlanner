@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.google.firebase.firestore.FirebaseFirestore
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -95,17 +96,10 @@ class CalendarDataSource {
         date = date,
     )
 }
-class CalendarActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            CalendarContent()
-        }
-    }
-}
+
 
 @Composable
-fun CalendarContent() {
+fun CalendarContent(db: FirebaseFirestore) {
     val dataSource = CalendarDataSource()
     var calendarUiModel by remember { mutableStateOf(dataSource.getData(lastSelectedDate = dataSource.today)) }
     Column(
@@ -222,9 +216,4 @@ fun ContentItem(date: CalendarUiModel.Date,
             )
         }
     }
-}
-@Preview(showBackground = true)
-@Composable
-fun CalendarPreview() {
-    CalendarContent()
 }
