@@ -131,7 +131,15 @@ fun CalendarContent(db: FirebaseFirestore) {
                     )
                 }
             )
+
+
         })
+
+
+            var taskItems =  db.collection("tasks")
+                .whereEqualTo("priority","HIGH")
+                .get()
+
 
     }
 }
@@ -186,7 +194,7 @@ fun ContentItem(date: CalendarUiModel.Date,
     Card(
         modifier = Modifier
             .padding(vertical = 4.dp, horizontal = 4.dp)
-            .clickable{ onClickListener(date)}
+            .clickable { onClickListener(date) }
         ,
         colors = CardDefaults.cardColors(
             // background colors of the selected date

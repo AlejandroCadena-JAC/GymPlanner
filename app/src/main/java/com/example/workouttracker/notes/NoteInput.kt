@@ -89,8 +89,8 @@ fun NoteInput(
                         "priority" to notePriority
                     )
 
-                    db.collection("tasks")
-                        .add(taskItem)
+                    db.collection("tasks").document(noteId.toString())
+                        .set(taskItem)
                     noteLabel = ""
                     noteId++
 
