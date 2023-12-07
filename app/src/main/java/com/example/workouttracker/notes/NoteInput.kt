@@ -83,7 +83,7 @@ fun NoteInput(
                 if (noteLabel.isNotBlank()) {
                     val notesItem = Notes(noteId, noteLabel, notePriority)
                     viewModel.addNotes(notesItem)
-
+                    // adding the note to the Firestore database
                     val taskItem = hashMapOf(
                         "name" to noteLabel,
                         "priority" to notePriority
