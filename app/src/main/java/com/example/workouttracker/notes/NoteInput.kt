@@ -18,6 +18,7 @@
 package com.codelabs.state
 
 import android.app.DatePickerDialog
+import android.view.RoundedCorner
 import android.widget.DatePicker
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -29,12 +30,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 //import androidx.compose.foundation.layout.ColumnScopeInstance.weight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
@@ -101,13 +104,13 @@ fun NoteInput(
             label = { Text("Enter a note!") },
             modifier = Modifier.padding(bottom = 12.dp)
         )
+
+        DatePicker()
+
         // Dropdown for priority of notes item
         PriorityDropdown(notePriority) { priority ->
             notePriority = priority
         }
-        //Row() {
-            DatePicker()
-        //}
         // add to notes list if not blank
         Button(
             onClick = {
@@ -164,16 +167,16 @@ fun DatePicker() {
 
     Card(
         modifier = Modifier
-            .fillMaxWidth(0.7f),
+            .fillMaxWidth(0.7f)
+            .fillMaxHeight(0.17f)
+            .padding(top = 16.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.Transparent
     ),
-        border = BorderStroke(1.dp, MaterialTheme.colorScheme.surface)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
+                .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
             OutlinedTextField(
@@ -183,6 +186,7 @@ fun DatePicker() {
                 readOnly = true,
                 modifier = Modifier
                     .weight(1f)
+                    .padding(bottom = 4.dp)
             )
             // IconButton with Icons.Default.DateRange
             IconButton(
@@ -219,7 +223,7 @@ fun PriorityDropdown(
     Box(
         modifier = Modifier
             .clickable { expanded = true }
-            .border(1.dp, Color.Gray)
+            .border(1.dp, Color.Gray, shape = RoundedCornerShape(8.dp))
             .padding(16.dp)
             .semantics { contentDescription = "Select Priority" },
         ) {
