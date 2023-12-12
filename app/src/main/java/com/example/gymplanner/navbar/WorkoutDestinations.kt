@@ -1,4 +1,4 @@
-package com.example.workouttracker.navbar
+package com.example.gymplanner.navbar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle

@@ -1,4 +1,4 @@
-package com.example.workouttracker.accountpage
+package com.example.gymplanner.accountpage
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +21,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import com.example.workouttracker.ui.theme.WorkoutTrackerTheme
+import com.example.gymplanner.ui.theme.WorkoutTrackerTheme
 import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
