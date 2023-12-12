@@ -22,10 +22,8 @@ import com.codelabs.state.NotesScreen
 import com.example.calendartest.CalendarContent
 import com.example.gymplanner.accountpage.SignInPage
 import com.example.gymplanner.exerciseinput.WorkoutInput
-import com.example.gymplanner.exerciselist.WorkoutList
 import com.example.gymplanner.navbar.Calendar
 import com.example.gymplanner.navbar.ExerciseInput
-import com.example.gymplanner.navbar.ExerciseList
 import com.example.gymplanner.navbar.ExerciseTabRow
 import com.example.gymplanner.navbar.Notes
 import com.example.gymplanner.navbar.SignIn
@@ -71,9 +69,6 @@ class MainActivity : ComponentActivity() {
                         ) {
                             composable(route = ExerciseInput.route) {
                                 WorkoutInput(db)
-                            }
-                            composable(route = ExerciseList.route) {
-                                WorkoutList()
                             }
                             composable(route = Notes.route) {
                                 NotesScreen(db)
