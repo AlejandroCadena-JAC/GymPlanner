@@ -17,33 +17,48 @@
 
 package com.codelabs.state
 
+import android.app.DatePickerDialog
+import android.widget.DatePicker
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 //import androidx.compose.foundation.layout.ColumnScopeInstance.weight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Calendar
+import java.util.Date
 
 
 /*
@@ -104,6 +119,59 @@ fun NoteInput(
             Text(text = "Add Note",
                 color = MaterialTheme.colorScheme.onPrimary)
         }
+    }
+    DatePicker()
+}
+
+@Composable
+fun DatePicker(
+){
+    val mContext = LocalContext.current
+
+    // Declaring integer values
+    // for year, month and day
+    val mYear: Int
+    val mMonth: Int
+    val mDay: Int
+
+    // Initializing a Calendar
+    val mCalendar = Calendar.getInstance()
+
+    // Fetching current year, month and day
+    mYear = mCalendar.get(Calendar.YEAR)
+    mMonth = mCalendar.get(Calendar.MONTH)
+    mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
+
+    mCalendar.time = Date()
+
+    // Declaring a string value to
+    // store date in string format
+    val mDate = remember { mutableStateOf("") }
+
+    // Declaring DatePickerDialog and setting
+    // initial values as current values (present year, month and day)
+    val mDatePickerDialog = DatePickerDialog(
+        mContext,
+        { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+            mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
+        }, mYear, mMonth, mDay
+    )
+
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+
+        // Creating a button that on
+        // click displays/shows the DatePickerDialog
+        Button(onClick = {
+            mDatePickerDialog.show()
+        }, colors = ButtonDefaults.buttonColors(Color(0XFF0F9D58)) ) {
+            Text(text = "Open Date Picker", color = Color.White)
+        }
+
+        // Adding a space of 100dp height
+        Spacer(modifier = Modifier.size(100.dp))
+
+        // Displaying the mDate value in the Text
+        Text(text = "Selected Date: ${mDate.value}", fontSize = 30.sp, textAlign = TextAlign.Center)
     }
 }
 
