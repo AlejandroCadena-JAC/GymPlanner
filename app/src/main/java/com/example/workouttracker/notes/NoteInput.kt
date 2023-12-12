@@ -19,27 +19,38 @@ package com.codelabs.state
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 //import androidx.compose.foundation.layout.ColumnScopeInstance.weight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -51,11 +62,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.workouttracker.R
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
 import java.util.Date
@@ -92,6 +105,9 @@ fun NoteInput(
         PriorityDropdown(notePriority) { priority ->
             notePriority = priority
         }
+        //Row() {
+            DatePicker()
+        //}
         // add to notes list if not blank
         Button(
             onClick = {
@@ -120,60 +136,74 @@ fun NoteInput(
                 color = MaterialTheme.colorScheme.onPrimary)
         }
     }
-    DatePicker()
 }
 
 @Composable
-fun DatePicker(
-){
+fun DatePicker() {
     val mContext = LocalContext.current
-
-    // Declaring integer values
-    // for year, month and day
-    val mYear: Int
-    val mMonth: Int
-    val mDay: Int
-
-    // Initializing a Calendar
     val mCalendar = Calendar.getInstance()
 
-    // Fetching current year, month and day
-    mYear = mCalendar.get(Calendar.YEAR)
-    mMonth = mCalendar.get(Calendar.MONTH)
-    mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
+    // Fetching current year, month, and day
+    val mYear = mCalendar.get(Calendar.YEAR)
+    val mMonth = mCalendar.get(Calendar.MONTH)
+    val mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
 
     mCalendar.time = Date()
 
-    // Declaring a string value to
-    // store date in string format
+    // Declaring a string value to store date in string format
     val mDate = remember { mutableStateOf("") }
 
     // Declaring DatePickerDialog and setting
-    // initial values as current values (present year, month and day)
+    // initial values as current values (present year, month, and day)
     val mDatePickerDialog = DatePickerDialog(
         mContext,
-        { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
-            mDate.value = "$mDayOfMonth/${mMonth+1}/$mYear"
+        { _, year, month, dayOfMonth ->
+            mDate.value = "$dayOfMonth/${month + 1}/$year"
         }, mYear, mMonth, mDay
     )
 
-    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-
-        // Creating a button that on
-        // click displays/shows the DatePickerDialog
-        Button(onClick = {
-            mDatePickerDialog.show()
-        }, colors = ButtonDefaults.buttonColors(Color(0XFF0F9D58)) ) {
-            Text(text = "Open Date Picker", color = Color.White)
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(0.7f),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.Transparent
+    ),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.surface)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            OutlinedTextField(
+                value = mDate.value,
+                onValueChange = { },
+                label = { Text("Selected Date") },
+                readOnly = true,
+                modifier = Modifier
+                    .weight(1f)
+            )
+            // IconButton with Icons.Default.DateRange
+            IconButton(
+                modifier = Modifier.padding(start = 12.dp),
+                onClick = {
+                    mDatePickerDialog.show()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.DateRange,
+                    contentDescription = null, // Content description for accessibility
+                    modifier = Modifier
+                        .size(32.dp)
+                )
+            }
         }
-
-        // Adding a space of 100dp height
-        Spacer(modifier = Modifier.size(100.dp))
-
-        // Displaying the mDate value in the Text
-        Text(text = "Selected Date: ${mDate.value}", fontSize = 30.sp, textAlign = TextAlign.Center)
     }
 }
+
+
+
 
 // INSPO SOURCE:
 // @see: https://alexzh.com/jetpack-compose-dropdownmenu/
