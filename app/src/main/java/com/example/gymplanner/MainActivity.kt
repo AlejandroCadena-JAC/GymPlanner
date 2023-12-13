@@ -20,7 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.codelabs.state.NotesScreen
 import com.example.calendartest.CalendarContent
-import com.example.gymplanner.accountpage.UserPage
+import com.example.gymplanner.accountpage.SignInPage
 import com.example.gymplanner.exerciseinput.WorkoutInput
 import com.example.gymplanner.navbar.Calendar
 import com.example.gymplanner.navbar.ExerciseInput
@@ -47,8 +47,6 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val currentBackStack by navController.currentBackStackEntryAsState()
                 val currentDestination = currentBackStack?.destination
-
-                val userPage = UserPage()
 
                 val currentScreen =
                     exerciseTabRowScreens.find { it.route == currentDestination?.route }
@@ -79,7 +77,7 @@ class MainActivity : ComponentActivity() {
                                 CalendarContent(db)
                             }
                             composable(route = SignIn.route) {
-                                userPage.SignInPage(db)
+                                SignInPage(db)
                             }
                         }
                     }
