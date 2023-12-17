@@ -7,12 +7,14 @@ what you can do isn't what we have in mind!
 
 *Landing Screen*
 
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/247b92a2-655e-441a-89d7-474581cccbc2)![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/3cdfc7b3-076a-4427-b1ec-3f777c5097bf)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/247b92a2-655e-441a-89d7-474581cccbc2)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/3cdfc7b3-076a-4427-b1ec-3f777c5097bf)
 
 ### Exercise Inputting
 Gone are the days of carrying that notepad around with you everywhere you go! Simply input your exercises for the day and that's it! 
 
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/afca1a6a-b73d-4db1-9b79-1c9317d44834)![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/aa23c4a5-3421-4d99-9c92-f99b03288b71)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/afca1a6a-b73d-4db1-9b79-1c9317d44834)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/aa23c4a5-3421-4d99-9c92-f99b03288b71)
 
 
 ### To-Do Notes
@@ -33,6 +35,23 @@ Keeping track of your notes is important. The calendar displays the notes you se
 
 ![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/b17b42ec-dcb3-4d37-9fcb-fe7106201af7)
 ![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/6e09526f-d7d4-4c81-ad76-7e9f7109b16f)
+
+### Account
+
+*Sign In*
+
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/c225e33d-fcc0-45a5-acd1-faea00ae5452)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/576b60ee-d233-40ab-8083-c84260c7be64)
+
+*Create an Account*
+
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/d36b7077-99ea-48db-9a49-d23ac1e3bcf5)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/840a5e89-1f74-464d-bc1a-7b7a790b5fd4)
+
+*Once Logged in*
+
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/02e8f898-8482-487e-a69e-b00aecccdf80)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/e18465ff-f7ca-4f06-8466-06a931eee92e)
 
 ### About
 
