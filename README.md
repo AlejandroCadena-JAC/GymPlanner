@@ -7,14 +7,12 @@ what you can do isn't what we have in mind!
 
 *Landing Screen*
 
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/247b92a2-655e-441a-89d7-474581cccbc2)
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/3cdfc7b3-076a-4427-b1ec-3f777c5097bf)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/247b92a2-655e-441a-89d7-474581cccbc2)![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/3cdfc7b3-076a-4427-b1ec-3f777c5097bf)
 
 ### Exercise Inputting
 Gone are the days of carrying that notepad around with you everywhere you go! Simply input your exercises for the day and that's it! 
 
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/afca1a6a-b73d-4db1-9b79-1c9317d44834)
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/aa23c4a5-3421-4d99-9c92-f99b03288b71)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/afca1a6a-b73d-4db1-9b79-1c9317d44834)![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/aa23c4a5-3421-4d99-9c92-f99b03288b71)
 
 
 ### To-Do Notes
@@ -24,11 +22,9 @@ That works too! Whatever you feel works best for you is the right way to use the
 
 *Selecting a date*
 
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/f16b565f-a9d0-4b1b-a97c-2cd5c62179de)
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/56f27bfa-b842-45fa-b7df-d9f8e217a6cf)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/f16b565f-a9d0-4b1b-a97c-2cd5c62179de)![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/56f27bfa-b842-45fa-b7df-d9f8e217a6cf)
 
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/3193c642-2060-4c77-8292-6a4b439d1c2f)
-![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/f8e0a7d2-11bd-4a13-8ac0-ac0adabc2371)
+![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/3193c642-2060-4c77-8292-6a4b439d1c2f)![image](https://github.com/AlejandroCadena-JAC/GymPlanner/assets/92652800/f8e0a7d2-11bd-4a13-8ac0-ac0adabc2371)
 
 ### Calendar
 Keeping track of your notes is important. The calendar displays the notes you set for whichever day so that you can keep track of whatever it is you need!
